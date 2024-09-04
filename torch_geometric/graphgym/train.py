@@ -14,14 +14,15 @@ from torch_geometric.graphgym.checkpoint import (
     save_ckpt,
 )
 from torch_geometric.graphgym.config import cfg
-from torch_geometric.graphgym.loss import compute_loss, compute_aux_loss, \
-    compute_multi_stage_loss
+from torch_geometric.graphgym.loss import compute_loss #compute_multi_stage_loss
 from torch_geometric.graphgym.utils.epoch import (
     is_ckpt_epoch,
     is_eval_epoch,
     is_train_eval_epoch,
 )
-
+def compute_aux_loss(self, inputs, cell, inv, wiki, task):
+    T, B, *_ = task.size()
+    return torch.Tensor([0] * T).to(cell.device)
 
 def train_epoch(logger, loader, model, optimizer, scheduler):
     model.train()
